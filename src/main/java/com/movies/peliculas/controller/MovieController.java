@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin("*")
 public class MovieController {
     @Autowired
     MovieService movieService;
@@ -27,6 +28,13 @@ public class MovieController {
     public Optional<Movie> getMovieById(@PathVariable("id") Long id){
         return movieService.obtenerporId(id);
     }
+
+    @PutMapping("/update/{id}")
+    public Movie updateMovie(@PathVariable("id") Long id, @RequestBody Movie movie){
+       return movieService.update(id,movie);
+    }
+
+
     @DeleteMapping(path = "/{id}")
     public String eliminarMovie(@PathVariable("id") Long id){
         boolean ok=movieService.eliminarMovie(id);

@@ -22,6 +22,24 @@ public class MovieService {
     public Optional<Movie> obtenerporId(Long id) {
      return movieRepository.findById(id);
     }
+public Movie update(Long id, Movie movie){
+        Optional<Movie>  movieData=movieRepository.findById(id);
+
+        if(movieData.isPresent()){
+            Movie _movie=movieData.get();
+            _movie.setTitle(movie.getTitle());
+            _movie.setSinopsis(movie.getSinopsis());
+            _movie.setLanguage(movie.getLanguage());
+            _movie.setReleased(movie.getReleased());
+            return movieRepository.save(_movie);
+        }
+        else {
+            return movie;
+
+        }
+
+
+}
 
     public boolean eliminarMovie(Long id){
         try {
